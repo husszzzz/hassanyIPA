@@ -614,6 +614,43 @@
             document.getElementById('reqFeatures').value = '';
         }
 
+        // مؤقت التحميل وتجاوز الحماية
+        function startDownloadTimer(event, btn) {
+            // إذا كان جاهز، نسمح بالضغطة الطبيعية
+            if (btn.dataset.ready === "true") {
+                setTimeout(() => {
+                    btn.dataset.ready = "false";
+                    btn.innerHTML = btn.dataset.origHtml;
+                }, 1000);
+                return;
+            }
+            
+            // نمنع التحميل المباشر
+            event.preventDefault();
+            
+            // نمنع الضغط المتكرر
+            if (btn.dataset.loading === "true") return;
+            
+            btn.dataset.loading = "true";
+            btn.dataset.origHtml = btn.innerHTML;
+            let seconds = 3;
+            btn.innerHTML = 'انتظر (' + seconds + ')';
+            
+            const timer = setInterval(() => {
+                seconds--;
+                if (seconds > 0) {
+                    btn.innerHTML = 'انتظر (' + seconds + ')';
+                } else {
+                    clearInterval(timer);
+                    btn.dataset.loading = "false";
+                    btn.dataset.ready = "true";
+                    btn.innerHTML = 'جاري التحميل...';
+                    // تشغيل الرابط بشكل طبيعي يحفظ نظام الـ noreferrer
+                    btn.click();
+                }
+            }, 1000);
+        }
+
         // جلب الداتا من جدول غوغل
         fetch(url)
             .then(res => res.text())
@@ -694,7 +731,7 @@
                             </div>
                         </div>
                         <div class="card-actions">
-                            <a href="${app.link}" target="_blank" class="btn-download">
+                            <a href="${app.link}" target="_blank" class="btn-download" rel="noreferrer" referrerpolicy="no-referrer" onclick="startDownloadTimer(event, this)">
                                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> تحميل
                             </a>
                             <button class="btn-details" onclick="toggleDetails(this)">
