@@ -614,25 +614,15 @@
             document.getElementById('reqFeatures').value = '';
         }
 
-        // مؤقت التحميل وتجاوز الحماية
+        // مؤقت التحميل وتجاوز الحماية الجديد والمضمون
         function startDownloadTimer(event, btn) {
-            // إذا كان جاهز، نسمح بالضغطة الطبيعية
-            if (btn.dataset.ready === "true") {
-                setTimeout(() => {
-                    btn.dataset.ready = "false";
-                    btn.innerHTML = btn.dataset.origHtml;
-                }, 1000);
-                return;
-            }
+            event.preventDefault(); // نمنع أي تصرف افتراضي يسبب مشاكل
             
-            // نمنع التحميل المباشر
-            event.preventDefault();
-            
-            // نمنع الضغط المتكرر
+            // نمنع الضغط المتكرر أثناء التحميل
             if (btn.dataset.loading === "true") return;
             
             btn.dataset.loading = "true";
-            btn.dataset.origHtml = btn.innerHTML;
+            const origHtml = btn.innerHTML; // نحفظ الشكل الأصلي للزر
             let seconds = 3;
             btn.innerHTML = 'انتظر (' + seconds + ')';
             
@@ -642,11 +632,23 @@
                     btn.innerHTML = 'انتظر (' + seconds + ')';
                 } else {
                     clearInterval(timer);
-                    btn.dataset.loading = "false";
-                    btn.dataset.ready = "true";
                     btn.innerHTML = 'جاري التحميل...';
-                    // تشغيل الرابط بشكل طبيعي يحفظ نظام الـ noreferrer
-                    btn.click();
+                    
+                    // توليد رابط مخفي وإجباره على التحميل مباشرة بدون المرور بالموقع الأصلي كزائر
+                    const link = document.createElement('a');
+                    link.href = btn.href;
+                    link.target = '_blank';
+                    link.rel = 'noreferrer noopener'; // إخفاء مسار موقعك وتجاوز حماية المتجر
+                    
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    // إرجاع الزر لشكله الطبيعي بعد ثانيتين
+                    setTimeout(() => {
+                        btn.dataset.loading = "false";
+                        btn.innerHTML = origHtml;
+                    }, 2000);
                 }
             }, 1000);
         }
