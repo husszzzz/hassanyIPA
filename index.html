@@ -49,6 +49,22 @@
         * {
             margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent; outline: none;
+            /* منع الضغطة المطولة وتحديد النصوص */
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* السماح بالكتابة في حقول الإدخال والبحث فقط */
+        input, textarea {
+            -webkit-user-select: auto;
+            -khtml-user-select: auto;
+            -moz-user-select: auto;
+            -ms-user-select: auto;
+            user-select: auto;
         }
 
         body {
@@ -835,9 +851,9 @@
                             </div>
                         </div>
                         <div class="card-actions">
-                            <a href="${app.link}" target="_blank" rel="noreferrer" class="btn-download">
+                            <button onclick="executeDownload('${app.link}')" class="btn-download">
                                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> تحميل
-                            </a>
+                            </button>
                             <button class="btn-details" onclick="toggleDetails(this)">
                                 التفاصيل <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
                             </button>
@@ -919,6 +935,29 @@
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // ==========================================================================
+        // إضافات الحماية والتحميل المباشر
+        // ==========================================================================
+
+        // 1. منع النسخ والنقر بزر الماوس الأيمن
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.addEventListener('copy', event => {
+            event.preventDefault();
+            showToast('عذراً، النسخ غير مسموح للحفاظ على الحقوق 🚫');
+        });
+
+        // 2. دالة التحميل المخفية (لإخفاء الرابط وتجاوز صفحة المتجر)
+        function executeDownload(url) {
+            // إنشاء رابط وهمي لتنفيذ الطلب بنفس الصفحة لمنع فتح نوافذ تظهر بها حقوق المتاجر
+            const tempLink = document.createElement('a');
+            tempLink.href = url;
+            // تجنب إرسال target=_blank لحل مشكلة الصفحة الثانية نهائياً
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+        }
+
     </script>
 </body>
 </html>
