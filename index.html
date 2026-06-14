@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="no-referrer">
     <title>hassanyIPA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -947,12 +948,13 @@
             showToast('عذراً، النسخ غير مسموح للحفاظ على الحقوق 🚫');
         });
 
-        // 2. دالة التحميل المخفية (لإخفاء الرابط وتجاوز صفحة المتجر)
+        // 2. دالة التحميل المخفية (لإخفاء الرابط وتجاوز صفحة المتجر وحل مشكلة الإعلانات)
         function executeDownload(url) {
-            // إنشاء رابط وهمي لتنفيذ الطلب بنفس الصفحة لمنع فتح نوافذ تظهر بها حقوق المتاجر
+            // إنشاء رابط وهمي لتنفيذ الطلب
             const tempLink = document.createElement('a');
             tempLink.href = url;
-            // تجنب إرسال target=_blank لحل مشكلة الصفحة الثانية نهائياً
+            // إخفاء المصدر عن المواقع المستضيفة للرابط
+            tempLink.rel = 'noreferrer noopener';
             document.body.appendChild(tempLink);
             tempLink.click();
             document.body.removeChild(tempLink);
