@@ -4,392 +4,406 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="referrer" content="no-referrer">
-    <title>hassanyIPA</title>
+    <title>hassanyIPA | المتجر الاحترافي</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================================================
-           1. المتغيرات والألوان (Variables)
+           1. المتغيرات والألوان (Modern Fluid Design System)
            ========================================================================== */
         :root {
-            --bg-color: #f4f7fe;
-            --card-bg: #ffffff;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --secondary: #ec4899;
-            --border: #e5e7eb;
-            --modal-bg: rgba(0, 0, 0, 0.5);
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
-            --glass-bg: rgba(255, 255, 255, 0.85);
+            --bg-color: #f6f8fd;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-pure: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --primary-glow: rgba(79, 70, 229, 0.15);
+            --secondary: #db2777;
+            --border: rgba(226, 232, 240, 0.8);
+            --modal-bg: rgba(15, 23, 42, 0.4);
+            --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 12px 20px -8px rgba(79, 70, 229, 0.08);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+            --glass-bg: rgba(255, 255, 255, 0.75);
+            --glass-blur: blur(16px);
         }
 
         .dark-mode {
-            --bg-color: #0b0f19;
-            --card-bg: #151c2c;
+            --bg-color: #070a13;
+            --card-bg: rgba(17, 24, 39, 0.8);
+            --card-pure: #111827;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
-            --primary: #818cf8;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --primary-glow: rgba(99, 102, 241, 0.3);
             --secondary: #f472b6;
-            --border: #2a3441;
-            --modal-bg: rgba(0, 0, 0, 0.8);
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.5);
-            --glass-bg: rgba(21, 28, 44, 0.85);
+            --border: rgba(31, 41, 55, 0.7);
+            --modal-bg: rgba(0, 0, 0, 0.75);
+            --shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 12px 24px -8px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+            --glass-bg: rgba(13, 18, 30, 0.8);
+            --glass-blur: blur(20px);
         }
 
         /* ==========================================================================
-           2. الإعدادات الأساسية (Reset & Base)
+           2. الإعدادات الأساسية وحماية المحتوى
            ========================================================================== */
         * {
             margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', sans-serif;
             -webkit-tap-highlight-color: transparent; outline: none;
-            /* منع الضغطة المطولة وتحديد النصوص */
             -webkit-touch-callout: none;
             -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
             user-select: none;
         }
 
-        /* السماح بالكتابة في حقول الإدخال والبحث فقط */
-        input, textarea {
+        input, textarea, select {
             -webkit-user-select: auto;
-            -khtml-user-select: auto;
-            -moz-user-select: auto;
-            -ms-user-select: auto;
             user-select: auto;
         }
 
         body {
             background-color: var(--bg-color); color: var(--text-main);
-            transition: background-color 0.4s ease, color 0.4s ease;
+            transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden;
         }
 
-        .container { flex: 1; max-width: 650px; margin: 0 auto; padding: 20px; width: 100%; }
+        .container { flex: 1; max-width: 680px; margin: 0 auto; padding: 25px 20px; width: 100%; }
 
         /* ==========================================================================
-           3. شاشة الانترو (Splash Screen & Intro Animation)
+           3. شاشة الانترو الاحترافية الفائقة السريعة (Cinema Splash Screen)
            ========================================================================== */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: var(--bg-color); z-index: 10000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.8s ease, visibility 0.8s;
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
         }
 
-        .wireframe-container { width: 80%; max-width: 300px; display: flex; flex-direction: column; gap: 15px; position: relative; }
-        .wf-header { height: 40px; border-radius: 10px; background: transparent; border: 2px solid var(--primary); width: 0; animation: drawBox 0.5s ease forwards; }
-        .wf-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-        .wf-box { height: 60px; border-radius: 10px; border: 2px solid var(--border); transform: scaleY(0); transform-origin: top; animation: dropDown 0.4s ease forwards; }
-        .wf-box:nth-child(1) { animation-delay: 0.3s; } .wf-box:nth-child(2) { animation-delay: 0.4s; } .wf-box:nth-child(3) { animation-delay: 0.5s; }
-        .wf-list { height: 100px; border-radius: 15px; border: 2px solid var(--border); opacity: 0; animation: fadeIn 0.5s 0.8s ease forwards; }
+        .splash-logo-container {
+            position: relative; display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+
+        .splash-glow-ring {
+            width: 90px; height: 90px; border-radius: 30px;
+            border: 3px solid transparent; background: linear-gradient(135deg, var(--primary), var(--secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out; mask-composite: exclude;
+            animation: ringPulse 0.7s infinite ease-in-out;
+        }
 
         .splash-text {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.8);
-            font-size: 24px; font-weight: 900; white-space: nowrap; opacity: 0;
+            font-size: 28px; font-weight: 900; letter-spacing: -0.5px;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: textPop 1.5s 1.2s ease forwards; z-index: 2;
-            text-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            animation: textReveal 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            text-shadow: 0 10px 30px var(--primary-glow); margin-top: 10px;
         }
 
-        @keyframes drawBox { to { width: 100%; } }
-        @keyframes dropDown { to { transform: scaleY(1); } }
-        @keyframes fadeIn { to { opacity: 1; } }
-        @keyframes textPop {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            40% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        @keyframes ringPulse {
+            0% { transform: scale(0.9) rotate(0deg); opacity: 0.5; filter: drop-shadow(0 0 0px var(--primary)); }
+            50% { transform: scale(1.05) rotate(180deg); opacity: 1; filter: drop-shadow(0 0 15px var(--primary)); }
+            100% { transform: scale(0.9) rotate(360deg); opacity: 0.5; filter: drop-shadow(0 0 0px var(--primary)); }
+        }
+        @keyframes textReveal {
+            0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* ==========================================================================
-           4. الهيدر والشريط العلوي
+           4. الهيدر وشريط المظهر اللامع
            ========================================================================== */
-        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px; padding-top: 10px; }
-        .logo { font-size: 26px; font-weight: 900; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .logo { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 4px 12px var(--primary-glow)); }
+        
         .theme-btn {
             background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
-            padding: 10px 18px; border-radius: 50px; cursor: pointer; font-weight: 700;
-            display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-sm); transition: 0.3s;
+            padding: 12px 20px; border-radius: 24px; cursor: pointer; font-weight: 800; font-size: 14px;
+            display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow-sm); backdrop-filter: var(--glass-blur); transition: all 0.3s ease;
         }
+        .theme-btn:hover { background: var(--card-pure); border-color: var(--primary); transform: translateY(-2px); box-shadow: var(--shadow-md); }
         .theme-btn:active { transform: scale(0.95); }
 
         /* ==========================================================================
-           5. المربعات الإحصائية العلوية
+           5. المربعات الإحصائية (Premium Fluid Design)
            ========================================================================== */
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 25px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 30px; }
         .stat-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px;
-            padding: 18px 5px; text-align: center; cursor: pointer; box-shadow: var(--shadow-sm);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px;
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
+            padding: 22px 10px; text-align: center; cursor: pointer; box-shadow: var(--shadow-sm);
+            backdrop-filter: var(--glass-blur); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;
         }
-        .stat-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: var(--primary); }
-        .stat-icon svg { width: 28px; height: 28px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+        .stat-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-md); border-color: var(--primary); }
+        .stat-icon svg { width: 32px; height: 32px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
         .stat-title { font-size: 13px; font-weight: 800; color: var(--text-muted); }
-        .stat-value { font-size: 24px; font-weight: 900; color: var(--text-main); line-height: 1; }
+        .stat-value { font-size: 26px; font-weight: 900; color: var(--text-main); line-height: 1; }
         
-        .card-cert .stat-icon { color: #f59e0b; }
-        .card-cert .stat-title { color: #f59e0b; }
-        .card-req .stat-icon { color: var(--primary); }
-        .card-app .stat-icon { color: #10b981; }
+        .card-cert { border-bottom: 4px solid #f59e0b; } .card-cert .stat-icon { color: #f59e0b; }
+        .card-req { border-bottom: 4px solid var(--primary); } .card-req .stat-icon { color: var(--primary); }
+        .card-app { border-bottom: 4px solid #10b981; } .card-app .stat-icon { color: #10b981; }
 
         /* ==========================================================================
-           6. البحث والأقسام (مع أيقونات SVG)
+           6. الفلترة والبحث المتطور
            ========================================================================== */
-        .search-wrapper { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+        .search-wrapper { display: flex; gap: 12px; margin-bottom: 25px; align-items: center; }
         .search-container { position: relative; flex: 1; }
         .search-input {
-            width: 100%; padding: 18px 20px 18px 55px; background: var(--card-bg);
-            border: 1px solid var(--border); border-radius: 20px; color: var(--text-main);
-            font-size: 15px; font-weight: 700; transition: 0.3s; box-shadow: var(--shadow-sm);
+            width: 100%; padding: 18px 22px 18px 55px; background: var(--card-bg);
+            border: 1px solid var(--border); border-radius: 24px; color: var(--text-main);
+            font-size: 15px; font-weight: 700; transition: all 0.3s ease; box-shadow: var(--shadow-sm);
+            backdrop-filter: var(--glass-blur);
         }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99,102,241,0.15); }
-        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; stroke: var(--text-muted); fill: none; stroke-width: 2; }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); background: var(--card-pure); }
+        .search-icon { position: absolute; left: 22px; top: 50%; transform: translateY(-50%); width: 22px; height: 22px; stroke: var(--text-muted); fill: none; stroke-width: 2.5; }
 
-        /* ستايل الفلترة (الإضافة الرابعة) */
         .sort-select {
-            padding: 18px 15px; border-radius: 20px; border: 1px solid var(--border);
+            padding: 18px 20px; border-radius: 24px; border: 1px solid var(--border);
             background: var(--card-bg); color: var(--text-main); font-weight: 800; font-size: 14px;
-            outline: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: 0.3s;
+            outline: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: all 0.3s ease;
+            backdrop-filter: var(--glass-blur); -webkit-appearance: none;
         }
-        .sort-select:focus { border-color: var(--primary); }
+        .sort-select:focus { border-color: var(--primary); background: var(--card-pure); }
 
-        .categories { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 15px; scrollbar-width: none; scroll-behavior: smooth; }
+        .categories { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 15px; margin-bottom: 20px; scrollbar-width: none; }
         .categories::-webkit-scrollbar { display: none; }
         
         .cat-btn {
             background: var(--card-bg); border: 1px solid var(--border); color: var(--text-main);
-            padding: 10px 22px; border-radius: 50px; white-space: nowrap; font-weight: 800;
-            font-size: 14px; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 50px; white-space: nowrap; font-weight: 800;
+            font-size: 14px; cursor: pointer; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex; align-items: center; gap: 8px; backdrop-filter: var(--glass-blur);
         }
-        .cat-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; }
-        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); transform: scale(1.05); box-shadow: 0 5px 15px rgba(99,102,241,0.3); }
+        .cat-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; }
+        .cat-btn:hover { border-color: var(--primary); color: var(--primary); }
+        .cat-btn.active { background: var(--primary); color: white; border-color: var(--primary); transform: scale(1.02); box-shadow: 0 8px 20px var(--primary-glow); }
+        
         .fav-cat-btn { border-color: var(--secondary); color: var(--secondary); }
-        .fav-cat-btn svg { stroke: var(--secondary); }
-        .fav-cat-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); box-shadow: 0 5px 15px rgba(236,72,153,0.3); }
+        .fav-cat-btn.active { background: var(--secondary); color: white; border-color: var(--secondary); box-shadow: 0 8px 20px rgba(236, 72, 153, 0.3); }
 
         /* ==========================================================================
-           7. شبكة التطبيقات (Cards)
+           7. بطاقات كروت التطبيقات الفاخرة (Glass Apps Display)
            ========================================================================== */
-        .apps-grid { display: flex; flex-direction: column; gap: 18px; }
+        .apps-grid { display: flex; flex-direction: column; gap: 20px; }
         .app-card {
-            background: var(--card-bg); border: 1px solid var(--border); border-radius: 24px;
-            padding: 20px; box-shadow: var(--shadow-sm); transition: 0.3s; position: relative;
-            animation: fadeInUp 0.5s ease backwards; overflow: hidden; /* لمنع خروج الشريط المائل */
+            background: var(--card-bg); border: 1px solid var(--border); border-radius: 32px;
+            padding: 24px; box-shadow: var(--shadow-sm); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) backwards; overflow: hidden; backdrop-filter: var(--glass-blur);
         }
-        .app-card:hover { box-shadow: var(--shadow-md); border-color: rgba(99,102,241,0.4); }
+        .app-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: rgba(99, 102, 241, 0.3); }
 
-        /* شريط التميز المائل (الإضافة الخامسة) */
-        .ribbon-wrapper {
-            position: absolute; top: -5px; right: -5px; width: 110px; height: 110px; overflow: hidden; z-index: 10;
-        }
+        /* شريط التميز اللامع المتطور */
+        .ribbon-wrapper { position: absolute; top: -5px; right: -5px; width: 120px; height: 120px; overflow: hidden; z-index: 10; }
         .ribbon {
-            position: absolute; top: 20px; right: -30px; width: 150px; 
-            background: linear-gradient(135deg, #ef4444, #f43f5e);
-            color: white; text-align: center; font-size: 12px; font-weight: 900; padding: 6px 0;
-            transform: rotate(45deg); box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            animation: ribbonShine 3s infinite; letter-spacing: 0.5px;
-        }
-        @keyframes ribbonShine {
-            0% { filter: brightness(1); } 50% { filter: brightness(1.2); } 100% { filter: brightness(1); }
+            position: absolute; top: 22px; right: -32px; width: 160px; 
+            background: linear-gradient(135deg, #f43f5e, #be123c);
+            color: white; text-align: center; font-size: 11px; font-weight: 900; padding: 6px 0;
+            transform: rotate(45deg); box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            letter-spacing: 0.5px; text-transform: uppercase;
         }
 
-        .app-header { display: flex; gap: 16px; align-items: center; margin-bottom: 18px; position: relative; z-index: 11; }
-        .app-icon { width: 80px; height: 80px; border-radius: 20px; object-fit: cover; background: var(--border); border: 1px solid var(--border); }
+        .app-header { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
+        .app-icon { width: 85px; height: 85px; border-radius: 24px; object-fit: cover; box-shadow: var(--shadow-sm); background: var(--border); border: 1px solid var(--border); transition: transform 0.3s ease; }
+        .app-card:hover .app-icon { transform: scale(1.04) rotate(-1deg); }
         .app-info { flex: 1; }
         .app-name-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-        .app-name { font-size: 19px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .app-name { font-size: 20px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
         
-        .badge { font-size: 11px; padding: 4px 10px; border-radius: 50px; font-weight: 800; background: rgba(239,68,68,0.1); color: #ef4444; border: 1px solid rgba(239,68,68,0.2); }
+        .badge { font-size: 11px; padding: 4px 12px; border-radius: 50px; font-weight: 800; background: rgba(239, 68, 68, 0.08); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.15); }
 
-        .fav-btn { background: none; border: none; cursor: pointer; padding: 5px; transition: 0.2s; }
-        .fav-btn:active { transform: scale(0.7); }
-        .fav-btn svg { width: 26px; height: 26px; fill: none; stroke: var(--text-muted); stroke-width: 2; transition: 0.3s; }
-        .fav-btn.favorited svg { fill: var(--secondary); stroke: var(--secondary); }
+        .fav-btn { background: none; border: none; cursor: pointer; padding: 6px; transition: all 0.2s; }
+        .fav-btn:hover { transform: scale(1.15); }
+        .fav-btn:active { transform: scale(0.85); }
+        .fav-btn svg { width: 24px; height: 24px; fill: none; stroke: var(--text-muted); stroke-width: 2.2; transition: 0.3s; }
+        .fav-btn.favorited svg { fill: var(--secondary); stroke: var(--secondary); filter: drop-shadow(0 0 6px rgba(236,72,153,0.4)); }
 
         .app-meta { display: flex; gap: 15px; font-size: 13.5px; color: var(--text-muted); font-weight: 700; align-items: center; }
         .meta-item { display: flex; align-items: center; gap: 6px; }
-        .meta-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
+        .meta-icon { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.2; }
 
-        .card-actions { display: flex; gap: 12px; margin-top: 10px; position: relative; z-index: 11; }
+        .card-actions { display: flex; gap: 14px; margin-top: 10px; }
         .btn-download {
-            flex: 1.5; padding: 14px; background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-            color: white; text-align: center; border-radius: 18px; text-decoration: none;
-            font-weight: 900; font-size: 16px; border: none; cursor: pointer; box-shadow: 0 4px 15px rgba(99,102,241,0.25); transition: 0.3s;
+            flex: 1.6; padding: 15px; background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+            color: white; text-align: center; border-radius: 20px; text-decoration: none;
+            font-weight: 900; font-size: 16px; border: none; cursor: pointer; box-shadow: 0 4px 18px var(--primary-glow); transition: all 0.3s ease;
             display: flex; justify-content: center; align-items: center; gap: 8px;
         }
-        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(99,102,241,0.4); }
-        .btn-download svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+        .btn-download:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
+        .btn-download:active { transform: translateY(-1px); }
 
         .btn-details {
-            flex: 1; padding: 14px; background: transparent; color: var(--text-main);
-            text-align: center; border-radius: 18px; font-weight: 800; font-size: 15px;
-            border: 2px solid var(--border); cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: 0.3s;
+            flex: 1; padding: 15px; background: transparent; color: var(--text-main);
+            text-align: center; border-radius: 20px; font-weight: 800; font-size: 15px;
+            border: 2px solid var(--border); cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px; transition: all 0.3s ease;
         }
-        .btn-details:hover { background: var(--border); }
-        .btn-details svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; transition: 0.4s; }
+        .btn-details:hover { background: var(--border); border-color: var(--text-muted); }
+        .btn-details svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.5; transition: transform 0.4s; }
         .btn-details.open svg { transform: rotate(180deg); }
 
-        /* زر عرض المزيد (الإضافة الثامنة) */
         .btn-load-more {
-            width: 100%; padding: 16px; margin-top: 10px; background: transparent;
-            color: var(--primary); border: 2px dashed var(--primary); border-radius: 20px;
-            font-weight: 900; font-size: 16px; cursor: pointer; transition: 0.3s;
+            width: 100%; padding: 18px; margin-top: 15px; background: transparent;
+            color: var(--primary); border: 2px dashed var(--primary); border-radius: 24px;
+            font-weight: 900; font-size: 16px; cursor: pointer; transition: all 0.3s ease;
         }
-        .btn-load-more:hover { background: rgba(99,102,241,0.1); border-style: solid; transform: translateY(-2px); }
+        .btn-load-more:hover { background: rgba(99,102,241,0.06); border-style: solid; transform: translateY(-2px); }
 
-        .app-description-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-        .app-description { margin-top: 15px; padding: 18px; background: rgba(107,114,128,0.05); border-radius: 18px; border: 1px solid var(--border); font-size: 14px; color: var(--text-muted); font-weight: 700; line-height: 1.8; position: relative; z-index: 11; }
+        .app-description-wrapper { max-height: 0; overflow: hidden; transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .app-description { margin-top: 18px; padding: 20px; background: rgba(107,114,128,0.04); border-radius: 20px; border: 1px solid var(--border); font-size: 14px; color: var(--text-muted); font-weight: 700; line-height: 1.8; }
 
         /* ==========================================================================
-           8. النوافذ المنبثقة ومؤقت المشاركة (Modals & Overlays)
+           8. النوافذ المنبثقة الفاخرة (Glassmorphic Modals Layout)
            ========================================================================== */
         .modal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--modal-bg); z-index: 1000; justify-content: center; align-items: center;
-            backdrop-filter: blur(8px); opacity: 0; transition: opacity 0.3s ease; padding: 15px;
+            backdrop-filter: blur(12px); opacity: 0; transition: opacity 0.4s ease; padding: 20px;
         }
         .modal.show { opacity: 1; }
 
         .modal-content {
-            background: var(--bg-color); width: 100%; max-width: 500px;
-            border-radius: 28px; padding: 0; position: relative; max-height: 90vh; overflow-y: auto;
-            transform: scale(0.9) translateY(20px); transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            background: var(--bg-color); width: 100%; max-width: 540px;
+            border-radius: 36px; padding: 0; position: relative; max-height: 85vh; overflow-y: auto;
+            transform: scale(0.92) translateY(30px); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: var(--shadow-lg); border: 1px solid var(--border);
         }
         .modal.show .modal-content { transform: scale(1) translateY(0); }
 
-        /* هيدر النافذة (زر الرجوع) */
         .modal-header-bar {
-            position: sticky; top: 0; background: var(--glass-bg); backdrop-filter: blur(10px);
-            padding: 20px; border-bottom: 1px solid var(--border); z-index: 10;
-            display: flex; align-items: center; justify-content: space-between; border-radius: 28px 28px 0 0;
+            position: sticky; top: 0; background: var(--glass-bg); backdrop-filter: var(--glass-blur);
+            padding: 22px; border-bottom: 1px solid var(--border); z-index: 10;
+            display: flex; align-items: center; justify-content: space-between; border-radius: 36px 36px 0 0;
         }
         .btn-back {
             background: transparent; border: none; color: var(--primary); font-weight: 800;
-            font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 5px 10px;
-            border-radius: 10px; transition: 0.3s;
+            font-size: 16px; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 14px;
+            border-radius: 14px; transition: all 0.3s;
         }
-        .btn-back:hover { background: rgba(99,102,241,0.1); }
-        .btn-back svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
-        .modal-main-title { font-size: 18px; font-weight: 900; color: var(--text-main); flex: 1; text-align: center; margin-right: -40px; }
+        .btn-back:hover { background: rgba(99,102,241,0.08); }
+        .btn-back svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+        .modal-main-title { font-size: 20px; font-weight: 900; color: var(--text-main); flex: 1; text-align: center; margin-right: -40px; }
 
-        .modal-body { padding: 25px 20px; }
+        .modal-body { padding: 30px 24px; }
 
-        /* شاشة مؤقت المشاركة (الإضافة الثانية) */
+        /* شاشة مؤقت المشاركة المتطور */
         #shareTimerOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-color); z-index: 1000000; display: none;
-            flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px;
+            flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px;
         }
         .timer-circle {
-            width: 100px; height: 100px; border-radius: 50%; border: 5px solid var(--border);
+            width: 110px; height: 110px; border-radius: 50%; border: 6px solid var(--border);
             border-top-color: var(--primary); display: flex; justify-content: center; align-items: center;
-            font-size: 32px; font-weight: 900; color: var(--primary); margin-bottom: 25px;
+            font-size: 36px; font-weight: 900; color: var(--primary); margin-bottom: 25px;
             animation: spinTimer 1s linear infinite; box-shadow: var(--shadow-md);
         }
-        .timer-circle span { animation: spinTimerReverse 1s linear infinite; }
         @keyframes spinTimer { 100% { transform: rotate(360deg); } }
-        @keyframes spinTimerReverse { 100% { transform: rotate(-360deg); } }
 
         /* ==========================================================================
-           9. باقات الشهادات
+           9. ثورة تصميم بطاقات الباقات (Revolutionary Package Cards)
            ========================================================================== */
-        .packages-container { display: flex; flex-direction: column; gap: 20px; }
-        .package-card { background: var(--card-bg); border: 2px solid var(--border); border-radius: 24px; padding: 25px; text-align: right; position: relative; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; gap: 15px; box-shadow: var(--shadow-sm); }
-        .pkg-fire { border-color: #ef4444; position: relative; z-index: 1; }
-        .pkg-fire::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(239,68,68,0.15) 0%, transparent 60%); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: -1; }
-        .pkg-fire:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 10px 30px rgba(239,68,68,0.3); border-color: #f87171; }
-        .pkg-fire:hover::before { opacity: 1; animation: rotateFire 4s linear infinite; }
-        @keyframes rotateFire { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .pkg-super { border-color: #3b82f6; }
-        .pkg-super:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(59,130,246,0.3); }
-        .pkg-vip { border-color: #f59e0b; }
-        .pkg-vip:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(245,158,11,0.3); }
-        .pkg-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed var(--border); padding-bottom: 15px; }
-        .pkg-title { font-weight: 900; font-size: 20px; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
-        .pkg-price { font-size: 18px; font-weight: 900; color: #10b981; background: rgba(16,185,129,0.1); padding: 8px 16px; border-radius: 12px; }
+        .packages-container { display: flex; flex-direction: column; gap: 24px; }
+        .package-card { 
+            background: var(--card-pure); border: 2px solid var(--border); border-radius: 28px; 
+            padding: 28px; text-align: right; position: relative; overflow: hidden; 
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); display: flex; flex-direction: column; gap: 18px; 
+            box-shadow: var(--shadow-sm); 
+        }
+        
+        /* الباقة النارية (توهج ناري بركاني) */
+        .pkg-fire { border-color: rgba(239, 68, 68, 0.3); }
+        .pkg-fire:hover { transform: translateY(-6px); border-color: #ef4444; box-shadow: 0 20px 35px rgba(239, 68, 68, 0.2); }
+        .pkg-fire .pkg-price { color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+        
+        /* باقة VIP (توهج ملكي ذهبي) */
+        .pkg-vip { border-color: rgba(245, 158, 11, 0.3); }
+        .pkg-vip:hover { transform: translateY(-6px); border-color: #f59e0b; box-shadow: 0 20px 35px rgba(245, 158, 11, 0.2); }
+        .pkg-vip .pkg-price { color: #f59e0b; background: rgba(245, 158, 11, 0.08); }
+
+        /* الباقة السوبر (توهج أزرق كهربائي) */
+        .pkg-super { border-color: rgba(59, 130, 246, 0.3); }
+        .pkg-super:hover { transform: translateY(-6px); border-color: #3b82f6; box-shadow: 0 20px 35px rgba(59, 130, 246, 0.2); }
+        .pkg-super .pkg-price { color: #3b82f6; background: rgba(59, 130, 246, 0.08); }
+
+        .pkg-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed var(--border); padding-bottom: 18px; }
+        .pkg-title { font-weight: 900; font-size: 22px; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .pkg-price { font-size: 19px; font-weight: 900; padding: 10px 18px; border-radius: 16px; }
+        
         .pkg-features { list-style: none; }
-        .pkg-features li { font-size: 14.5px; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
-        .pkg-features li svg { width: 18px; height: 18px; stroke: #10b981; fill: none; stroke-width: 3; flex-shrink: 0; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; font-weight: 800; margin-bottom: 8px; font-size: 14px; color: var(--text-main); }
-        .form-control { width: 100%; padding: 16px; border-radius: 16px; border: 2px solid var(--border); background: var(--card-bg); color: var(--text-main); font-weight: 700; font-size: 15px; outline: none; transition: 0.3s; }
-        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(99,102,241,0.1); }
-        .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border: none; border-radius: 16px; font-weight: 900; font-size: 17px; cursor: pointer; transition: all 0.3s; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(99,102,241,0.3); text-decoration: none; }
-        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(99,102,241,0.5); }
-        .btn-submit svg { width: 22px; height: 22px; fill: white; }
+        .pkg-features li { font-size: 15px; font-weight: 700; color: var(--text-muted); margin-bottom: 14px; display: flex; align-items: center; gap: 12px; }
+        .pkg-features li svg { width: 18px; height: 18px; stroke: #10b981; fill: none; stroke-width: 3.5; flex-shrink: 0; }
+
+        /* نموذج الإدخال الفاخر */
+        .form-group { margin-bottom: 22px; }
+        .form-group label { display: block; font-weight: 800; margin-bottom: 10px; font-size: 14px; color: var(--text-main); }
+        .form-control { width: 100%; padding: 18px; border-radius: 20px; border: 2px solid var(--border); background: var(--card-pure); color: var(--text-main); font-weight: 700; font-size: 15px; outline: none; transition: all 0.3s ease; }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+        
+        .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, var(--primary), var(--primary-hover)); color: white; border: none; border-radius: 20px; font-weight: 900; font-size: 17px; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; gap: 10px; box-shadow: 0 8px 25px var(--primary-glow); text-decoration: none; }
+        .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(99,102,241,0.45); }
 
         /* ==========================================================================
-           10. قسم الدعم الفني و الأزرار العائمة
+           10. مركز الدعم الفني والأزرار التفاعلية
            ========================================================================== */
         .site-footer {
-            margin-top: 50px; padding: 30px 20px; background: var(--card-bg); border-top: 1px solid var(--border);
-            text-align: center; border-radius: 30px 30px 0 0; box-shadow: 0 -5px 20px rgba(0,0,0,0.02);
+            margin-top: 60px; padding: 40px 20px; background: var(--card-bg); border-top: 1px solid var(--border);
+            text-align: center; border-radius: 40px 40px 0 0; backdrop-filter: var(--glass-blur);
         }
-        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 15px; }
-        .footer-title { font-size: 18px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 8px; }
-        .footer-title svg { width: 24px; height: 24px; stroke: var(--primary); fill: none; stroke-width: 2; }
+        .footer-content { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        .footer-title { font-size: 20px; font-weight: 900; color: var(--text-main); display: flex; align-items: center; gap: 10px; }
+        .footer-title svg { width: 26px; height: 26px; stroke: var(--primary); fill: none; stroke-width: 2.2; }
+        
         .footer-link {
-            display: inline-flex; align-items: center; gap: 10px; background: rgba(59,130,246,0.1); color: #3b82f6;
-            padding: 12px 24px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; transition: 0.3s;
+            display: inline-flex; align-items: center; gap: 12px; background: rgba(59,130,246,0.08); color: #3b82f6;
+            padding: 14px 28px; border-radius: 50px; text-decoration: none; font-weight: 800; font-size: 16px; border: 1px solid rgba(59,130,246,0.15); transition: all 0.3s ease;
         }
-        .footer-link:hover { background: #3b82f6; color: white; transform: scale(1.05); }
-        .footer-link svg { width: 20px; height: 20px; fill: currentColor; }
-        .footer-copy { font-size: 13px; font-weight: 600; color: var(--text-muted); margin-top: 15px; }
+        .footer-link:hover { background: #3b82f6; color: white; transform: translateY(-3px) scale(1.03); box-shadow: 0 10px 20px rgba(59,130,246,0.2); }
+        .footer-link svg { width: 22px; height: 22px; fill: currentColor; }
+        .footer-copy { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-top: 15px; }
 
-        /* زر الصعود للأعلى (الإضافة العاشرة) */
         #scrollToTopBtn {
-            position: fixed; bottom: 30px; right: 20px; background: var(--primary);
-            color: white; border: none; border-radius: 50%; width: 50px; height: 50px;
-            font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(99,102,241,0.4);
-            opacity: 0; visibility: hidden; transition: 0.4s; z-index: 999;
+            position: fixed; bottom: 35px; right: 25px; background: var(--primary);
+            color: white; border: none; border-radius: 50%; width: 54px; height: 54px;
+            cursor: pointer; box-shadow: 0 10px 25px var(--primary-glow);
+            opacity: 0; visibility: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); z-index: 999;
             display: flex; justify-content: center; align-items: center;
         }
-        #scrollToTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(-10px); }
-        #scrollToTopBtn:hover { background: var(--primary-hover); transform: translateY(-15px) scale(1.1); }
+        #scrollToTopBtn.visible { opacity: 1; visibility: visible; transform: translateY(-5px); }
+        #scrollToTopBtn:hover { background: var(--primary-hover); transform: translateY(-10px) scale(1.08); }
 
         /* ==========================================================================
-           11. الإشعارات والأنيميشن
+           11. التنبيهات والأشكال التحميلية
            ========================================================================== */
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shimmer { 0% { background-position: -1000px 0; } 100% { background-position: 1000px 0; } }
         
-        /* شكل التحميل (الإضافة الأولى) */
         .skeleton-card {
-            height: 180px; background: linear-gradient(to right, var(--card-bg) 8%, var(--border) 18%, var(--card-bg) 33%);
-            background-size: 1000px 100%; animation: shimmer 2s infinite linear; border-radius: 24px; border: 1px solid var(--border);
+            height: 185px; background: linear-gradient(to right, var(--card-bg) 8%, var(--border) 18%, var(--card-bg) 33%);
+            background-size: 1000px 100%; animation: shimmer 2s infinite linear; border-radius: 32px; border: 1px solid var(--border);
         }
 
         .toast {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px);
-            background: var(--text-main); color: var(--bg-color); padding: 14px 28px;
+            position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(120px);
+            background: var(--text-main); color: var(--bg-color); padding: 16px 32px;
             border-radius: 50px; font-weight: 800; font-size: 15px; opacity: 0;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; box-shadow: var(--shadow-lg);
-            display: flex; align-items: center; gap: 10px;
+            display: flex; align-items: center; gap: 12px;
         }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-        .toast svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .toast svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-        /* ستايل زر التليجرام المتوهج والنافذة الخاصة به */
         .btn-tg-glow {
             background: linear-gradient(135deg, #229ED9, #0088cc) !important;
-            box-shadow: 0 0 15px rgba(0, 136, 204, 0.6) !important;
-            animation: tgGlow 2s infinite ease-in-out;
+            box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4) !important;
+            animation: tgGlow 2.5s infinite ease-in-out;
         }
         @keyframes tgGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 136, 204, 0.6); }
-            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(0, 136, 204, 0.9); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); box-shadow: 0 12px 30px rgba(0, 136, 204, 0.6) !important; }
         }
     </style>
 </head>
@@ -398,38 +412,34 @@
     <div id="shareTimerOverlay">
         <div class="timer-circle"><span id="shareTimerCount">7</span></div>
         <h2 style="margin-bottom: 15px; color: var(--text-main); font-weight: 900; font-size: 26px;">سوف يتم تجهيز الرابط...</h2>
-        <p style="color: var(--text-muted); font-weight: 800; margin-bottom: 20px; font-size: 16px;">
+        <p style="color: var(--text-muted); font-weight: 800; margin-bottom: 25px; font-size: 16px;">
             ⚠️ يمكنك تحميل المحتوى الأصلي من الموقع الرسمي حصراً
         </p>
-        <a href="https://husszzzz.github.io/hassanyIPA/" style="color: var(--primary); font-weight: 900; text-decoration: none; font-size: 18px; background: rgba(99,102,241,0.1); padding: 10px 20px; border-radius: 12px;" target="_blank">https://husszzzz.github.io/hassanyIPA/</a>
+        <a href="https://husszzzz.github.io/hassanyIPA/" style="color: var(--primary); font-weight: 900; text-decoration: none; font-size: 18px; background: rgba(99,102,241,0.08); padding: 12px 24px; border-radius: 16px; border: 1px solid var(--border);" target="_blank">https://husszzzz.github.io/hassanyIPA/</a>
     </div>
 
-    <div id="maintenance-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 100000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px;">
+    <div id="maintenance-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-color); z-index: 100000; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 30px;">
         <style>
             @keyframes spinGear { 100% { transform: rotate(360deg); } }
-            .gear-icon { width: 100px; height: 100px; stroke: var(--primary); fill: none; stroke-width: 2; margin-bottom: 20px; animation: spinGear 4s linear infinite; }
+            .gear-icon { width: 110px; height: 110px; stroke: var(--primary); fill: none; stroke-width: 2; margin-bottom: 25px; animation: spinGear 3.5s linear infinite; filter: drop-shadow(0 0 10px var(--primary-glow)); }
         </style>
         <svg class="gear-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-        <h1 style="font-size: 32px; font-weight: 900; color: var(--text-main); margin-bottom: 10px;">الموقع تحت الصيانة 🛠️</h1>
-        <p style="font-size: 18px; color: var(--text-muted); font-weight: 700;">نعمل حالياً على إضافة تطبيقات وتحديثات جديدة، سنعود لكم قريباً جداً!</p>
-    </div>
-    <div id="splash-screen">
-        <div class="wireframe-container">
-            <div class="wf-header"></div>
-            <div class="wf-grid">
-                <div class="wf-box"></div><div class="wf-box"></div><div class="wf-box"></div>
-            </div>
-            <div class="wf-list"></div>
-            <div class="wf-list"></div>
-        </div>
-        <div class="splash-text">مرحباً في Hassany IPA</div>
+        <h1 style="font-size: 34px; font-weight: 900; color: var(--text-main); margin-bottom: 12px;">الموقع تحت الصيانة 🛠️</h1>
+        <p style="font-size: 18px; color: var(--text-muted); font-weight: 700; max-width: 450px; line-height: 1.6;">نعمل حالياً على إضافة تطبيقات متميزة وتحديثات جديدة، سنعود لكم قريباً جداً!</p>
     </div>
 
-    <div class="container" id="main-content" style="opacity:0; transition: opacity 0.5s;">
+    <div id="splash-screen">
+        <div class="splash-logo-container">
+            <div class="splash-glow-ring"></div>
+            <div class="splash-text">Hassany IPA</div>
+        </div>
+    </div>
+
+    <div class="container" id="main-content" style="opacity:0; transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
         <header>
             <div class="logo">Hassany IPA</div>
             <button class="theme-btn" onclick="toggleTheme()">
-                <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <svg id="theme-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                 <span id="theme-text">ليلي</span>
             </button>
         </header>
@@ -452,7 +462,7 @@
         <div class="search-wrapper">
             <div class="search-container">
                 <svg class="search-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن تطبيق أو لعبة..." onkeyup="filterApps()">
+                <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن تطبيق أو لعبة هك..." onkeyup="filterApps()">
             </div>
             <select class="sort-select" id="sortSelect" onchange="applySort()">
                 <option value="newest">الأحدث</option>
@@ -470,7 +480,7 @@
                 <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                 الكل
             </button>
-            </div>
+        </div>
 
         <div class="apps-grid" id="apps-container">
             <div class="skeleton-card"></div><div class="skeleton-card"></div><div class="skeleton-card"></div>
@@ -481,18 +491,18 @@
         <div class="footer-content">
             <div class="footer-title">
                 <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-                مركز الدعم الفني
+                مركز الدعم الفني المباشر
             </div>
             <a href="https://t.me/OM_G9" target="_blank" class="footer-link">
                 <svg viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"></path></svg>
-                تواصل معنا @OM_G9
+                تواصل معنا الآن @OM_G9
             </a>
-            <div class="footer-copy">© 2026 Hassany Store. جميع الحقوق محفوظة.</div>
+            <div class="footer-copy">© 2026 Hassany Store. جميع الحقوق محفوظة برمجياً.</div>
         </div>
     </footer>
 
     <button id="scrollToTopBtn" onclick="scrollToTop()">
-        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
     </button>
 
     <div class="modal" id="requestModal">
@@ -501,23 +511,23 @@
                 <button class="btn-back" onclick="closeModal('requestModal')">
                     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> رجوع
                 </button>
-                <div class="modal-main-title">اطلب لعبتك</div>
+                <div class="modal-main-title">اطلب لعبتك أو تطبيقك</div>
                 <div style="width:70px;"></div> </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>اسم التطبيق/اللعبة</label>
-                    <input type="text" id="reqName" class="form-control" placeholder="اكتب اسم اللعبة هنا...">
+                    <label>اسم التطبيق / اللعبة المطلوبة</label>
+                    <input type="text" id="reqName" class="form-control" placeholder="اكتب اسم اللعبة أو البرنامج هنا...">
                 </div>
                 <div class="form-group">
-                    <label>رابط اللعبة من الآب ستور</label>
+                    <label>رابط اللعبة المباشر من الآب ستور (إن وجد)</label>
                     <input type="url" id="reqLink" class="form-control" placeholder="https://apps.apple.com/...">
                 </div>
                 <div class="form-group">
-                    <label>مميزات الهاك المطلوبة</label>
-                    <textarea id="reqFeatures" class="form-control" rows="4" placeholder="مثال: رادار، إخفاء عشب، إلخ..."></textarea>
+                    <label>مميزات الهاك أو التعديل المطلوبة</label>
+                    <textarea id="reqFeatures" class="form-control" rows="4" placeholder="مثال: رادار كاشف، إخفاء عشب، تكرار التطبيقات، إلخ..."></textarea>
                 </div>
                 <button class="btn-submit" onclick="sendToTelegram()">
-                    إرسال الطلب <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    إرسال الطلب للمطور <svg viewBox="0 0 24 24" style="width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2.2;"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
                 </button>
             </div>
         </div>
@@ -529,7 +539,7 @@
                 <button class="btn-back" onclick="closeModal('certModal')">
                     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> رجوع
                 </button>
-                <div class="modal-main-title">الباقات المتاحة</div>
+                <div class="modal-main-title">باقات شهادات أبل المتاحة</div>
                 <div style="width:70px;"></div>
             </div>
             <div class="modal-body">
@@ -537,51 +547,48 @@
                     
                     <div class="package-card pkg-fire">
                         <div class="pkg-header">
-                            <div class="pkg-title"><span style="font-size:24px;">🔥</span> الباقة النارية</div>
-                            <div class="pkg-price">10 آلاف </div>
-
+                            <div class="pkg-title"><span style="font-size:24px;">🔥</span> الباقة النارية الأكثر طلباً</div>
+                            <div class="pkg-price">10 آلاف عراقي</div>
                         </div>
                         <ul class="pkg-features">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية </li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال (شهر) | المدة سنة ✅</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية للموبايل </li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة بالكامل</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع (إيساين وغيره)</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال فوري (شهر) | المدة سنة كاملة ✅</li>
                         </ul>
                     </div>
 
                     <div class="package-card pkg-vip">
                         <div class="pkg-header">
-                            <div class="pkg-title"><span style="font-size:24px;">👑</span> باقة الـ VIP</div>
-                            <div class="pkg-price">15 آلاف </div>
-                            
+                            <div class="pkg-title"><span style="font-size:24px;">👑</span> باقة الـ VIP الملكية</div>
+                            <div class="pkg-price">15 ألف عراقي</div>
                         </div>
                         <ul class="pkg-features">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية </li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال (3 أشهر) | المدة سنة ✅</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية للموبايل </li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة بالكامل</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع (إيساين وغيره)</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال فوري (3 أشهر) | المدة سنة كاملة ✅</li>
                         </ul>
                     </div>
 
                     <div class="package-card pkg-super">
                         <div class="pkg-header">
-                            <div class="pkg-title"><span style="font-size:24px;">⚡</span> الباقة السوبر</div>
-                            <div class="pkg-price">25 آلاف </div>
-                            
+                            <div class="pkg-title"><span style="font-size:24px;">⚡</span> الباقة السوبر القصوى</div>
+                            <div class="pkg-price">25 ألف عراقي</div>
                         </div>
                         <ul class="pkg-features">
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية </li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>م-اطول مده ضمان ممكنه</li>
-                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال (6 أشهر) | المدة سنة ✅</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> شهادة أبل ذهبية رسمية للموبايل </li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> مكتبة ضخمة معدلة ومحذوفة بالكامل</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> دعم كافة برامج التوقيع (إيساين وغيره)</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> أطول مدة ضمان ممتدة متاحة للنظام</li>
+                            <li><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg> استبدال فوري (6 أشهر) | المدة سنة كاملة ✅</li>
                         </ul>
                     </div>
 
                 </div>
                 
                 <a href="https://t.me/OM_G9" target="_blank" class="btn-submit" style="margin-top:25px;">
-                    اشترك الآن عبر التليكرام <svg viewBox="0 0 24 24"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"></path></svg>
+                    اشترك الآن مباشرة عبر التليكرام <svg viewBox="0 0 24 24" style="width:20px; height:20px; fill:currentColor;"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"></path></svg>
                 </a>
             </div>
         </div>
@@ -593,30 +600,30 @@
                 <button class="btn-back" onclick="closeModal('telegramModal')">
                     <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> إغلاق
                 </button>
-                <div class="modal-main-title">تحميل عبر التليجرام</div>
+                <div class="modal-main-title">تحميل آمن عبر التليجرام</div>
                 <div style="width:70px;"></div>
             </div>
             <div class="modal-body" style="text-align: center; display: flex; flex-direction: column; gap: 20px;">
-                <h3 style="color: var(--primary); font-weight: 900; font-size: 20px; margin-bottom: 5px;">سوف يتم التحميل عن طريق التلجرام</h3>
+                <h3 style="color: var(--primary); font-weight: 900; font-size: 20px; margin-bottom: 5px;">سوف يتم فتح ملف التحميل بالتليجرام</h3>
                 
-                <div style="text-align: right; background: rgba(107,114,128,0.05); padding: 15px; border-radius: 18px; border: 1px solid var(--border); font-weight: 700; font-size: 14.5px; line-height: 1.8;">
-                    <p style="margin-bottom: 12px; color: var(--text-main); font-weight: 800;">يرجى اتباع الخطوات التالية للتنزيل بنجاح:</p>
+                <div style="text-align: right; background: rgba(107,114,128,0.04); padding: 18px; border-radius: 20px; border: 1px solid var(--border); font-weight: 700; font-size: 14.5px; line-height: 1.8;">
+                    <p style="margin-bottom: 12px; color: var(--text-main); font-weight: 800;">يرجى اتباع الخطوات التالية للتنزيل وتوقيع الـ IPA:</p>
                     <p style="color: var(--text-main); margin-bottom: 10px;">
-                        <strong style="color: var(--secondary);">1- أولاً:</strong> اضغط على زر تحميل من التلجرام الموجود بالأسفل  .
+                        <strong style="color: var(--secondary);">1- أولاً:</strong> اضغط على زر "تحميل من التليجرام" المتواجد أدناه.
                     </p>
                     <p style="color: var(--text-main);">
-                        <strong style="color: var(--secondary);">2- ثانياً:</strong> اضغط على زر <strong>VIEW in channel</strong> أو <strong>المشاهدة على التليجرام</strong>.
+                        <strong style="color: var(--secondary);">2- ثانياً:</strong> اضغط على زر <strong>VIEW in channel</strong> أو <strong>المشاهدة في القناة</strong> لبدء التنزيل المباشر.
                     </p>
                 </div>
 
                 <a href="#" id="tgModalLink" target="_blank" class="btn-download btn-tg-glow" style="text-decoration: none;">
-                    <svg viewBox="0 0 24 24" style="fill: currentColor; stroke: none; width: 20px; height: 20px;"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"/></svg>
-                    تحميل من التلجرام
+                    <svg viewBox="0 0 24 24" style="fill: currentColor; stroke: none; width: 22px; height: 22px;"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"/></svg>
+                    تحميل مباشر من التليجرام
                 </a>
 
                 <div style="margin-top: 10px;">
-                    <p style="color: var(--text-muted); font-size: 14px; font-weight: 800; margin-bottom: 12px;">دليل توضيحي للخطوات 👇</p>
-                    <img src="https://e.top4top.io/p_38186i65l0.jpeg" alt="دليل التليجرام" style="width: 100%; max-width: 350px; border-radius: 20px; border: 2px solid var(--border); box-shadow: var(--shadow-md); display: block; margin: 0 auto;">
+                    <p style="color: var(--text-muted); font-size: 14px; font-weight: 800; margin-bottom: 12px;">الدليل التوضيحي المصور للخطوات المتبعة 👇</p>
+                    <img src="https://e.top4top.io/p_38186i65l0.jpeg" alt="دليل التليجرام المصور" style="width: 100%; max-width: 360px; border-radius: 24px; border: 2px solid var(--border); box-shadow: var(--shadow-md); display: block; margin: 0 auto;">
                 </div>
             </div>
         </div>
@@ -624,13 +631,12 @@
 
     <div class="toast" id="toastMsg">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
-        <span id="toastText">تمت العملية بنجاح</span>
+        <span id="toastText">تمت العملية بنجاح كامل</span>
     </div>
 
     <script>
-        // إعدادات الانترو (Splash Screen) ومؤقت المشاركة
+        // إعدادات الإنترو السريع ومؤقت المشاركات التلقائي
         window.addEventListener('load', () => {
-            // التحقق من وجود تطبيق مٌشارك عبر الرابط (الإضافة الثانية)
             const urlParams = new URLSearchParams(window.location.search);
             const sharedApp = urlParams.get('app');
             
@@ -646,32 +652,33 @@
                     if(timeLeft <= 0) {
                         clearInterval(interval);
                         timerOverlay.style.display = 'none';
-                        // البحث التلقائي عن التطبيق المٌشارك بعد الانتهاء
                         document.getElementById('searchInput').value = decodeURIComponent(sharedApp);
                         setTimeout(filterApps, 500);
                     }
                 }, 1000);
             }
 
+            // تفعيل الإخفاء التلقائي للإنترو بعد 2.4 ثانية تماماً (أقل من 3 ثواني حسب طلبك)
             setTimeout(() => {
                 const splash = document.getElementById('splash-screen');
                 const main = document.getElementById('main-content');
                 splash.style.opacity = '0';
                 splash.style.visibility = 'hidden';
                 main.style.opacity = '1';
-            }, 2600); // مدة عرض الانترو (2.6 ثانية)
+            }, 1000);
         });
+        document.body.classList.add('dark-mode');
 
-        // متغيرات البيانات والتقسيم (Pagination)
+        // متغيرات جلب ومزامنة جدول بيانات جوجل شيت المطور
         const sheetID = '12OIHyFai2ylBaJYJpoz91uPfeu37dgqJk8Y5w8U9-ao';
         const url = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
         let allApps = [];
-        let currentFilteredApps = []; // نحتفظ هنا بنسخة للتنقل والفرز
+        let currentFilteredApps = []; 
         let displayedAppsCount = 0;
-        let loadLimit = 10; // (الإضافة الثامنة) عدد التطبيقات المعروضة
+        let loadLimit = 10; 
         let favorites = JSON.parse(localStorage.getItem('hassany_favorites')) || [];
 
-        // نظام المظهر الليلي/النهاري
+        // إدارة تبديل الواجهات والمظهر (ليلي / نهاري)
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
             const isDark = document.body.classList.contains('dark-mode');
@@ -679,27 +686,28 @@
             const icon = document.getElementById('theme-icon');
             
             if(isDark) {
-                text.innerText = 'نهاري';
+                text.innerText = 'ليلي';
                 icon.innerHTML = '<circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>';
             } else {
-                text.innerText = 'ليلي';
+                text.innerText = 'نهاري';
                 icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
             }
         }
 
-        // تحكم النوافذ مع أزرار الرجوع
+        // معالجة النوافذ المنبثقة المتطورة بشكل آمن وسلس
         function openModal(id) {
             const modal = document.getElementById(id);
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('show'), 10);
-            document.body.style.overflow = 'hidden'; // منع النزول بالخلفية
+            document.body.style.overflow = 'hidden'; 
         }
+        
         function closeModal(id) {
             const modal = document.getElementById(id);
             modal.classList.remove('show');
             setTimeout(() => {
                 modal.style.display = 'none';
-                document.body.style.overflow = 'auto'; // إرجاع النزول
+                document.body.style.overflow = 'auto'; 
             }, 400);
         }
 
@@ -709,7 +717,7 @@
             }
         }
 
-        // نظام الإشعارات (Toasts)
+        // إشعارات الهاردوير التفاعلية السريعة (Toasts)
         function showToast(msg) {
             const toast = document.getElementById('toastMsg');
             document.getElementById('toastText').innerText = msg;
@@ -717,22 +725,22 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
 
-        // مشاركة التطبيق (الإضافة الثانية والثالثة)
+        // معالجة تشفير روابط مشاركة التطبيقات والالعاب المعدلة
         function shareApp(appName) {
             const shareUrl = new URL(window.location.href.split('?')[0]);
             shareUrl.searchParams.set('app', encodeURIComponent(appName));
             navigator.clipboard.writeText(shareUrl.href).then(() => {
-                showToast('تم نسخ رابط المشاركة بنجاح 🔗');
+                showToast('تم نسخ رابط مشاركة التطبيق بنجاح 🔗');
             });
         }
 
-        // المفضلة
+        // تفعيل وإلغاء تفضيل التطبيقات والبرامج
         function toggleFavorite(appName, btnElement) {
             const index = favorites.indexOf(appName);
             if(index > -1) {
                 favorites.splice(index, 1);
                 btnElement.classList.remove('favorited');
-                showToast('تم الإزالة من المفضلة');
+                showToast('تم الإزالة من قائمة المفضلة الخاص بك');
             } else {
                 favorites.push(appName);
                 btnElement.classList.add('favorited');
@@ -741,26 +749,26 @@
             localStorage.setItem('hassany_favorites', JSON.stringify(favorites));
         }
 
-        // زر التفاصيل الأكورديون
+        // فتح وإغلاق قائمة تفاصيل الـ IPA (Accordion)
         function toggleDetails(btn) {
             btn.classList.toggle('open');
             const wrapper = btn.closest('.app-card').querySelector('.app-description-wrapper');
             if (wrapper.style.maxHeight) {
                 wrapper.style.maxHeight = null;
-                btn.innerHTML = 'التفاصيل <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+                btn.innerHTML = 'التفاصيل <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;"><polyline points="6 9 12 15 18 9"></polyline></svg>';
             } else {
                 wrapper.style.maxHeight = wrapper.scrollHeight + "px";
-                btn.innerHTML = 'إخفاء <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>';
+                btn.innerHTML = 'إخفاء <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.5;"><polyline points="6 9 12 15 18 9"></polyline></svg>';
             }
         }
 
-        // إرسال طلب التليكرام
+        // معالجة تحويل وإرسال نموذج طلب تطبيق جديد إلى التليجرام
         function sendToTelegram() {
             const n = document.getElementById('reqName').value;
             const l = document.getElementById('reqLink').value;
             const f = document.getElementById('reqFeatures').value;
-            if(!n) { alert('الرجاء إدخال اسم اللعبة أو التطبيق!'); return; }
-            const msg = `*طلب لعبة جديدة* 🎮\n\n📌 الاسم: ${n}\n🔗 الرابط: ${l}\n⚙️ المميزات: ${f}`;
+            if(!n) { alert('الرجاء كتابة اسم التطبيق أو اللعبة أولاً!'); return; }
+            const msg = `*طلب تطبيق جديد للمتجر* 🎮\n\n📌 الاسم: ${n}\n🔗 الرابط: ${l}\n⚙️ المميزات المطلوبة: ${f}`;
             window.open(`https://t.me/OM_G9?text=${encodeURIComponent(msg)}`, '_blank');
             closeModal('requestModal');
             document.getElementById('reqName').value = '';
@@ -768,13 +776,14 @@
             document.getElementById('reqFeatures').value = '';
         }
 
-        // جلب الداتا من جدول غوغل
+        // جلب وقراءة مصفوفة البيانات من جدول غوغل شيت بشكل مباشر ومتطور
         fetch(url)
             .then(res => res.text())
             .then(text => {
                 const data = JSON.parse(text.substring(47, text.length - 2));
                 const rows = data.table.rows;
                 
+                // التحقق من فحص وتفعيل وضع شاشة الصيانة من داخل الجدول
                 if (rows.length > 1 && rows[1].c && rows[1].c.length > 25 && rows[1].c[25] && rows[1].c[25].v) {
                     const status = String(rows[1].c[25].v).trim();
                     if (status === 'كلا') {
@@ -793,8 +802,6 @@
                     const r = rows[i].c;
                     if (!r || !r[0] || !r[0].v) continue;
                     
-                    // استخراج بيانات الإضافة الخامسة (شريط التميز)
-                    // الخانة W ترتيبها 22، والخانة X ترتيبها 23
                     let isFeatured = r[22] ? String(r[22].v).trim() : '';
                     let featureText = r[23] ? String(r[23].v).trim() : '';
                     let finalBadgeText = '';
@@ -809,16 +816,16 @@
                         name: r[0]?r[0].v:'-', icon: r[1]?r[1].v:'',
                         category: r[2]?r[2].v:'عام', version: r[3]?r[3].v:'v1.0',
                         size: r[4]?r[4].v:'-', badge: r[5]?r[5].v:'',
-                        desc: r[6]?r[6].v:'لا يوجد وصف متاح.', link: r[7]?r[7].v:'#',
+                        desc: r[6]?r[6].v:'لا يوجد وصف متاح للتطبيق حالياً.', link: r[7]?r[7].v:'#',
                         tgDownload: r[8] ? String(r[8].v).trim() : 'لا',
-                        customBadge: finalBadgeText, // إضافة الشريط
-                        originalIndex: i // نحتفظ بالترتيب القديم عشان (الأقدم/الأحدث)
+                        customBadge: finalBadgeText, 
+                        originalIndex: i 
                     };
                     allApps.push(app);
                     if(app.category) cats.add(app.category);
                 }
 
-                allApps.reverse(); // افتراضياً الأحدث
+                allApps.reverse(); 
                 currentFilteredApps = [...allApps];
 
                 document.getElementById('app-counter').innerText = allApps.length;
@@ -829,28 +836,27 @@
                     catCont.innerHTML += `<button class="cat-btn" onclick="filterCategory('${c}', this)">${folderSvg} ${c}</button>`;
                 });
 
-                applySort(); // نعرض البيانات بعد تطبيق الفرز الحالي
+                applySort(); 
             })
             .catch(err => {
-                document.getElementById('apps-container').innerHTML = '<div style="text-align:center; padding:40px; color:#ef4444; font-weight:900;">❌ حدث خطأ، يرجى التأكد من صلاحيات جدول غوغل.</div>';
+                document.getElementById('apps-container').innerHTML = '<div style="text-align:center; padding:50px; color:#ef4444; font-weight:900;">❌ فشل الاتصال بقاعدة البيانات، يرجى التحقق من جدول غوغل.</div>';
             });
 
-        // رسم كروت التطبيقات (تم تعديلها لدعم عرض المزيد والشريط المائل)
+        // إنشاء وعرض الكروت بتأثير الأنيميشن والتوهج المتطور الجديد
         function renderApps(apps, reset = true) {
             const cont = document.getElementById('apps-container');
             
             if (reset) {
                 cont.innerHTML = '';
                 displayedAppsCount = 0;
-                loadLimit = 10; // إعادة التعيين لـ 10 تطبيقات بالبداية (الإضافة الثامنة)
+                loadLimit = 10; 
             } else {
-                // إذا كنا نضغط عرض المزيد، نحذف الزر القديم فقط
                 const oldBtn = document.getElementById('loadMoreBtnContainer');
                 if(oldBtn) oldBtn.remove();
             }
 
             if(apps.length === 0) {
-                cont.innerHTML = '<div style="text-align:center; padding:50px; font-weight:800; color:var(--text-muted);">لم يتم العثور على نتائج 🔍</div>';
+                cont.innerHTML = '<div style="text-align:center; padding:60px; font-weight:800; color:var(--text-muted); font-size:16px;">لم يتم العثور على أي نتائج مطابقة 🔍</div>';
                 return;
             }
 
@@ -858,14 +864,13 @@
 
             appsToRender.forEach((app, i) => {
                 const isFav = favorites.includes(app.name) ? 'favorited' : '';
-                const delay = i * 0.05;
+                const delay = i * 0.04;
 
                 let badgeHTML = '';
                 if(app.badge && app.badge !== 'null' && app.badge.trim() !== '') {
                     badgeHTML = `<span class="badge">${app.badge}</span>`;
                 }
 
-                // إضافة شريط التميز (الإضافة الخامسة)
                 let customBadgeHTML = '';
                 if(app.customBadge !== '') {
                     customBadgeHTML = `<div class="ribbon-wrapper"><div class="ribbon">${app.customBadge}</div></div>`;
@@ -882,7 +887,7 @@
                             <div class="app-info">
                                 <div class="app-name-row">
                                     <div class="app-name">${app.name} ${badgeHTML}</div>
-                                    <div style="display:flex; gap: 8px;">
+                                    <div style="display:flex; gap: 6px;">
                                         <button class="fav-btn" onclick="shareApp('${app.name}')" title="مشاركة">
                                             <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
                                         </button>
@@ -900,7 +905,7 @@
                         </div>
                         <div class="card-actions">
                             <button onclick="handleDownload('${app.link}', '${app.tgDownload}')" class="btn-download">
-                                <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> تحميل
+                                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.5;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> تحميل التثبيت
                             </button>
                             <button class="btn-details" onclick="toggleDetails(this)">
                                 التفاصيل <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -915,65 +920,66 @@
                 displayedAppsCount++;
             });
 
-            // إذا بعدكو تطبيقات ما معروضة نطلع زر "عرض المزيد"
             if (displayedAppsCount < apps.length) {
                 cont.insertAdjacentHTML('beforeend', `
-                    <div id="loadMoreBtnContainer">
-                        <button class="btn-load-more" onclick="loadMoreApps()">عرض المزيد ⏬</button>
+                    <div id="loadMoreBtnContainer" style="width:100%;">
+                        <button class="btn-load-more" onclick="loadMoreApps()">عرض المزيد من التطبيقات ⏬</button>
                     </div>
                 `);
             }
         }
 
-        // دالة زر عرض المزيد
         function loadMoreApps() {
             loadLimit += 10;
             renderApps(currentFilteredApps, false);
         }
 
-        // دالة الترتيب (الإضافة الرابعة)
+        // فرز وترتيب الكروت حسب خيارات التصفية المختلفة
         function applySort() {
             const sortVal = document.getElementById('sortSelect').value;
             
             if (sortVal === 'newest') {
-                currentFilteredApps.sort((a, b) => b.originalIndex - a.originalIndex); // الاحدث (لأن عكسنا المصفوفة مسبقاً)
+                currentFilteredApps.sort((a, b) => b.originalIndex - a.originalIndex); 
             } else if (sortVal === 'oldest') {
-                currentFilteredApps.sort((a, b) => a.originalIndex - b.originalIndex); // الاقدم
+                currentFilteredApps.sort((a, b) => a.originalIndex - b.originalIndex); 
             } else if (sortVal === 'az') {
-                currentFilteredApps.sort((a, b) => a.name.localeCompare(b.name, 'ar')); // ابجدي
+                currentFilteredApps.sort((a, b) => a.name.localeCompare(b.name, 'ar')); 
             }
             
             renderApps(currentFilteredApps, true);
         }
 
-        // الفلاتر
+        // معالجة أنظمة تصفية البحث والأقسام النشطة
         function filterApps() {
             const q = document.getElementById('searchInput').value.toLowerCase();
             currentFilteredApps = allApps.filter(a => a.name.toLowerCase().includes(q));
             applySort();
             updateActiveBtn(null);
         }
+        
         function filterCategory(cat, btn) {
             document.getElementById('searchInput').value = '';
             currentFilteredApps = (cat === 'الكل') ? [...allApps] : allApps.filter(a => a.category === cat);
             applySort();
             updateActiveBtn(btn);
         }
+        
         function filterFavorites(btn) {
             document.getElementById('searchInput').value = '';
             currentFilteredApps = allApps.filter(a => favorites.includes(a.name));
             applySort();
             updateActiveBtn(btn);
         }
+        
         function updateActiveBtn(activeBtn) {
             document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
             if(activeBtn) activeBtn.classList.add('active');
         }
 
-        // سكريبت زر الصعود للأعلى (الإضافة العاشرة)
+        // معالجة ظهور زر الصعود السلس للأعلى عند النزول بالصفحة
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('scrollToTopBtn');
-            if (window.scrollY > 300) {
+            if (window.scrollY > 350) {
                 btn.classList.add('visible');
             } else {
                 btn.classList.remove('visible');
@@ -985,29 +991,24 @@
         }
 
         // ==========================================================================
-        // إضافات الحماية والتحميل المباشر
+        // أنظمة الحماية المتطورة وتشفير مسار التنزيل وحل مشكلة الاعلانات
         // ==========================================================================
 
-        // 1. منع النسخ والنقر بزر الماوس الأيمن
         document.addEventListener('contextmenu', event => event.preventDefault());
         document.addEventListener('copy', event => {
             event.preventDefault();
-            showToast('عذراً، النسخ غير مسموح للحفاظ على الحقوق 🚫');
+            showToast('عذراً، النسخ غير مسموح لحماية حقوق متجر Hassany 🚫');
         });
 
-        // 2. دالة التحميل المخفية (لإخفاء الرابط وتجاوز صفحة المتجر وحل مشكلة الإعلانات)
         function executeDownload(url) {
-            // إنشاء رابط وهمي لتنفيذ الطلب
             const tempLink = document.createElement('a');
             tempLink.href = url;
-            // إخفاء المصدر عن المواقع المستضيفة للرابط
             tempLink.rel = 'noreferrer noopener';
             document.body.appendChild(tempLink);
             tempLink.click();
             document.body.removeChild(tempLink);
         }
 
-        // دالة فحص التحميل وإدارة نافذة التليجرام المنبثقة
         function handleDownload(url, tgDownload) {
             if (tgDownload === 'نعم') {
                 document.getElementById('tgModalLink').href = url;
