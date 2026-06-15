@@ -380,6 +380,17 @@
         }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
         .toast svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        /* ستايل زر التليجرام المتوهج والنافذة الخاصة به */
+        .btn-tg-glow {
+            background: linear-gradient(135deg, #229ED9, #0088cc) !important;
+            box-shadow: 0 0 15px rgba(0, 136, 204, 0.6) !important;
+            animation: tgGlow 2s infinite ease-in-out;
+        }
+        @keyframes tgGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(0, 136, 204, 0.6); }
+            50% { transform: scale(1.03); box-shadow: 0 0 25px rgba(0, 136, 204, 0.9); }
+        }
     </style>
 </head>
 <body>
@@ -576,6 +587,41 @@
         </div>
     </div>
 
+    <div class="modal" id="telegramModal">
+        <div class="modal-content">
+            <div class="modal-header-bar">
+                <button class="btn-back" onclick="closeModal('telegramModal')">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg> إغلاق
+                </button>
+                <div class="modal-main-title">تحميل عبر التليجرام</div>
+                <div style="width:70px;"></div>
+            </div>
+            <div class="modal-body" style="text-align: center; display: flex; flex-direction: column; gap: 20px;">
+                <h3 style="color: var(--primary); font-weight: 900; font-size: 20px; margin-bottom: 5px;">سوف يتم التحميل عن طريق التلجرام</h3>
+                
+                <div style="text-align: right; background: rgba(107,114,128,0.05); padding: 15px; border-radius: 18px; border: 1px solid var(--border); font-weight: 700; font-size: 14.5px; line-height: 1.8;">
+                    <p style="margin-bottom: 12px; color: var(--text-main); font-weight: 800;">يرجى اتباع الخطوات التالية للتنزيل بنجاح:</p>
+                    <p style="color: var(--text-main); margin-bottom: 10px;">
+                        <strong style="color: var(--secondary);">1- أولاً:</strong> اضغط على زر تحميل من التلجرام الموجود بالأسفل والذي يلمع.
+                    </p>
+                    <p style="color: var(--text-main);">
+                        <strong style="color: var(--secondary);">2- ثانياً:</strong> اضغط على زر <strong>VIEW in chanal</strong> أو <strong>المشاهدة على التليجرام</strong>.
+                    </p>
+                </div>
+
+                <a href="#" id="tgModalLink" target="_blank" class="btn-download btn-tg-glow" style="text-decoration: none;">
+                    <svg viewBox="0 0 24 24" style="fill: currentColor; stroke: none; width: 20px; height: 20px;"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-18.6 7.143c-1.25.48-1.246 1.136-.214 1.45l4.76 1.488 1.455 4.542c.22.686.113.818.824.818.536 0 .753-.25 1.144-.633l2.748-2.67 5.71 4.215c1.05.58 1.8.28 2.062-.973l3.733-17.587c.394-1.57-.592-2.28-1.6-1.908z"/></svg>
+                    تحميل من التلجرام
+                </a>
+
+                <div style="margin-top: 10px;">
+                    <p style="color: var(--text-muted); font-size: 14px; font-weight: 800; margin-bottom: 12px;">دليل توضيحي للخطوات 👇</p>
+                    <img src="image.png" alt="دليل التليجرام" style="width: 100%; max-width: 350px; border-radius: 20px; border: 2px solid var(--border); box-shadow: var(--shadow-md); display: block; margin: 0 auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="toast" id="toastMsg">
         <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
         <span id="toastText">تمت العملية بنجاح</span>
@@ -764,6 +810,7 @@
                         category: r[2]?r[2].v:'عام', version: r[3]?r[3].v:'v1.0',
                         size: r[4]?r[4].v:'-', badge: r[5]?r[5].v:'',
                         desc: r[6]?r[6].v:'لا يوجد وصف متاح.', link: r[7]?r[7].v:'#',
+                        tgDownload: r[8] ? String(r[8].v).trim() : 'لا',
                         customBadge: finalBadgeText, // إضافة الشريط
                         originalIndex: i // نحتفظ بالترتيب القديم عشان (الأقدم/الأحدث)
                     };
@@ -852,7 +899,7 @@
                             </div>
                         </div>
                         <div class="card-actions">
-                            <button onclick="executeDownload('${app.link}')" class="btn-download">
+                            <button onclick="handleDownload('${app.link}', '${app.tgDownload}')" class="btn-download">
                                 <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg> تحميل
                             </button>
                             <button class="btn-details" onclick="toggleDetails(this)">
@@ -960,6 +1007,15 @@
             document.body.removeChild(tempLink);
         }
 
+        // دالة فحص التحميل وإدارة نافذة التليجرام المنبثقة
+        function handleDownload(url, tgDownload) {
+            if (tgDownload === 'نعم') {
+                document.getElementById('tgModalLink').href = url;
+                openModal('telegramModal');
+            } else {
+                executeDownload(url);
+            }
+        }
     </script>
 </body>
 </html>
